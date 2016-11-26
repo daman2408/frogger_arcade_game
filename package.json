@@ -1,0 +1,17 @@
+{
+  "name": "frogger",
+  "version": "1.0.0",
+  "description": "frogger game",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daman Mangat",
+  "license": "ISC",
+  "dependencies": {
+    "lodash.range": "^3.2.0"
+  },
+  "devDependencies": {
+    "babel-preset-latest": "^6.16.0"
+  }
+}
