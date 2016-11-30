@@ -29,7 +29,7 @@
   };
 
   Enemy.prototype.resetXposition = function() {
-    this.x = Math.floor(Math.random() * 3 + 1) * -100;
+    this.x = (Math.floor(Math.random() * -300 + 1) * -100);
   };
 
   // When a roach collides with the player, run the reset function and set level to 1

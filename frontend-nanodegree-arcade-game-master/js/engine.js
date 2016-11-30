@@ -23,15 +23,11 @@ var Engine = (function(global) {
         win = global.window,
         canvas = doc.createElement('canvas'),
         ctx = canvas.getContext('2d'),
-        startGameButton = doc.createElement('button'),
-        startButtonNode = doc.createTextNode('Start Game'),
         lastTime;
 
     canvas.width = 505;
     canvas.height = 606;
     doc.body.appendChild(canvas);
-    startGameButton.appendChild(startButtonNode);
-    doc.body.appendChild(startGameButton);
 
     /* This function serves as the kickoff point for the game loop itself
      * and handles properly calling the update and render methods.
@@ -84,7 +80,6 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
