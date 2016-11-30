@@ -2,24 +2,17 @@
   var level = 1;
   var numberOfLives = 3;
   var score = 0;
-  var playerXposition;
-  var playerYposition;
 
-  var resetPlayerAndRoaches = function() {
-    player.y = 386;
-    player.x = 202;
+  var resetRoaches = function() {
     allEnemies.forEach(function(enemy) {
       enemy.resetXposition();
     });
-  }
+  };
 
   // Enemies our player must avoid
   var Enemy = function() {
       // Variables applied to each of our instances go here,
       // we've provided one for you to get started
-      // var bugYposition = [66,146,226];
-      // var randomXnumber = Math.floor(Math.random() * -3 - 10);
-      // var randomYnumber = Math.floor(Math.random() * 3);
       // The image/sprite for our enemies, this uses
       // a helper we've provided to easily load images
       this.sprite = 'images/enemy-bug.png';
@@ -40,13 +33,14 @@
   };
 
   // When a roach collides with the player, run the reset function and set level to 1
-  // this.x + 35 == playerXposition - 35 || this.x - 35 == playerXposition + 35
   Enemy.prototype.handleCollision = function() {
-    if ((playerXposition >= this.x - 70 && playerXposition <= this.x + 70) && this.y === playerYposition) {
+
+    if ((player.x >= this.x - 70 && player.x <= this.x + 70) && this.y === player.y) {
       if (level > 0 || level < 0) {
         level = 1;
       };
-        resetPlayerAndRoaches();
+        player.resetPlayer();
+        resetRoaches();
     } else {
       return;
     }
@@ -59,7 +53,7 @@
       this.createYposition();
       this.resetXposition();
       this.x+=xSpeed;
-    }
+    };
   };
 
 
@@ -79,16 +73,16 @@
 
 
   // Create enemies of different speeds
-  var FastEnemy = function() {
-    Enemy.call(this);
-  };
-
-  FastEnemy.prototype = Object.create(Enemy.prototype);
-  FastEnemy.prototype.constructor = FastEnemy;
-  FastEnemy.prototype.update = function() {
-    this.handleSpeed(level + 4);
-    this.handleCollision();
-  }
+  // var FastEnemy = function() {
+  //   Enemy.call(this);
+  // };
+  //
+  // FastEnemy.prototype = Object.create(Enemy.prototype);
+  // FastEnemy.prototype.constructor = FastEnemy;
+  // FastEnemy.prototype.update = function() {
+  //   this.handleSpeed(level + 4);
+  //   this.handleCollision();
+  // }
 
   var SlowEnemy = function() {
     Enemy.call(this);
@@ -110,12 +104,18 @@
     this.y = 386;
   };
 
+  Player.prototype.resetPlayer = function() {
+    this.y = 386;
+    this.x = 202;
+  };
+
   Player.prototype.update = function() {
     if (this.y <= -14) {
       level++;
       score+=1000;
       console.log('level: ' + level + '\n' + 'score: ' + score);
-      resetPlayerAndRoaches();
+      this.resetPlayer();
+      resetRoaches();
     }
   };
 
@@ -183,15 +183,15 @@
   var enemy2 = new Enemy();
   var enemy3 = new Enemy();
 
-  var fastEnemy1 = new FastEnemy();
-  var fastEnemy2 = new FastEnemy();
-  var fastEnemy3 = new FastEnemy();
+  // var fastEnemy1 = new FastEnemy();
+  // var fastEnemy2 = new FastEnemy();
+  // var fastEnemy3 = new FastEnemy();
 
   var slowEnemy1 = new SlowEnemy();
   var slowEnemy2 = new SlowEnemy();
   var slowEnemy3 = new SlowEnemy();
 
-  var allEnemies = [slowEnemy1, slowEnemy2, slowEnemy3, enemy1, enemy2, enemy3, fastEnemy3];
+  var allEnemies = [slowEnemy1, slowEnemy2, slowEnemy3, enemy1, enemy2, enemy3];
 
   var player = new Player();
 
